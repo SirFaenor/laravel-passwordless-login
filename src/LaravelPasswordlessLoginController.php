@@ -52,6 +52,10 @@ class LaravelPasswordlessLoginController extends Controller
         $this->passwordlessLoginService->cacheRequest($request);
 
         $user = $this->passwordlessLoginService->user;
+        
+        if(!$user) {
+            abort(401);
+        }
 
         $guard = $user->guard_name ?? config('laravel-passwordless-login.user_guard');
 

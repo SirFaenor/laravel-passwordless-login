@@ -35,6 +35,11 @@ class PasswordlessLoginService
      */
     public function usesTrait(): bool
     {
+
+        if(!$this->user) {
+            return false;
+        }
+
         $traits = class_uses($this->user, true);
 
         return in_array(PasswordlessLogin::class, $traits);
